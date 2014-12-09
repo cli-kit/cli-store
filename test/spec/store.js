@@ -1,6 +1,6 @@
 var expect = require('chai').expect
   , path = require('path')
-  , ConfigStore = require('../../lib').store;
+  , ConfigStore = require('../..');
 
 describe('Store:', function() {
 
@@ -10,6 +10,20 @@ describe('Store:', function() {
     expect(store.types).to.be.an('array');
     expect(store.storage).to.be.an('object');
     store.clear();
+    done();
+  });
+
+  it('should create global config store', function(done) {
+    var store = new ConfigStore({global: true});
+    expect(global.CONFIG_STORAGE).to.be.an('object');
+    done();
+  });
+
+  it('should chain calls', function(done) {
+    var store = new ConfigStore()
+      .argv()
+      .env();
+    expect(store).to.be.an.instanceof(ConfigStore);
     done();
   });
 
@@ -46,6 +60,19 @@ describe('Store:', function() {
       {env: {prefix: 'sa', initialize: true, match: /^sa_/i}});
     store.env();
     store.replace({strict: false});
+    expect(store.storage.env).to.be.an('object');
+    expect(Object.keys(store.storage.env).length).to.be.gt(0);
+    expect(store.get('mockVar')).to.eql('var-ref-value');
+    done();
+  });
+
+  it('should replace environment variables (zero options)', function(done) {
+    process.env.var_ref='var-ref-value';
+    process.env.sa_mock_var='${var_ref}';
+    var store = new ConfigStore(
+      {env: {prefix: 'sa', initialize: true, match: /^sa_/i}});
+    store.env();
+    store.replace();
     expect(store.storage.env).to.be.an('object');
     expect(Object.keys(store.storage.env).length).to.be.gt(0);
     expect(store.get('mockVar')).to.eql('var-ref-value');

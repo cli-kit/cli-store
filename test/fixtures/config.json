@@ -1,0 +1,18 @@
+{
+  "level": "fatal",
+  "session": {
+    "secret": "${sa_session_secret}"
+  },
+  "api": {
+    "seed": "${sa_api_seed}"
+  },
+  "database": {
+    "auth": {
+      "username": "${sa_db_username}",
+      "password": "${sa_db_password}"
+    }
+  },
+  "geo": {
+    "key": "${sa_geo_key}"
+  }
+}
