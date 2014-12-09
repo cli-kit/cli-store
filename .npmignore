@@ -1,0 +1,9 @@
+/coverage
+/target
+/package
+/build
+/test
+*.log
+*.pid
+*.bak
+*.tgz

@@ -1,0 +1,47 @@
+{
+  "name": "cli-store",
+  "description": "Lightweight configuration storage",
+  "version": "0.1.0",
+  "author": "muji <noop@xpm.io>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/freeformsystems/cli-store.git"
+  },
+  "dependencies": {
+    "cli-argparse": "~0.4.3",
+    "cli-env": "~1.0.10",
+    "cli-util": "~1.1.26"
+  },
+  "devDependencies": {
+    "chai": "~1.9.2",
+    "istanbul": "~0.3.2",
+    "mocha": "~1.21.4"
+  },
+  "engine": [
+    "node >= 0.10.11"
+  ],
+  "scripts": {
+    "docs": "npm run readme",
+    "readme": "mdp --force -v",
+    "pretest": "test -d ./test || (echo run tests from: $npm_package_repository_url && false)",
+    "test": "NODE_ENV=test istanbul cover _mocha -- -u bdd --recursive --bail --reporter list test/spec"
+  },
+  "mdp": {
+    "title": "Store",
+    "pedantic": true,
+    "include": "doc/readme",
+    "require": "lib",
+    "links": "links.md",
+    "toc": "Table of Contents",
+    "base": "https://github.com/freeformsystems/cli-store",
+    "partial": [
+      {
+        "inc": [
+          "introduction.md",
+          "install.md",
+          "developer.md"
+        ]
+      }
+    ]
+  }
+}
