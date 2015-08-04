@@ -8,23 +8,25 @@
     "url": "git://github.com/freeformsystems/cli-store.git"
   },
   "dependencies": {
-    "cli-argparse": "~0.4.6",
+    "cli-argparse": "~1.0.8",
     "cli-env": "~1.0.10",
     "cli-util": "~1.1.27"
   },
   "devDependencies": {
-    "chai": "~1.10.0",
-    "istanbul": "~0.3.5",
-    "mocha": "~2.1.0"
+    "chai": "~3.2.0",
+    "istanbul": "~0.3.17",
+    "mocha": "~2.2.5"
   },
   "engine": [
     "node >= 0.10.11"
   ],
   "scripts": {
+    "clean": "rm -rf coverage",
     "docs": "npm run readme",
     "readme": "mdp --force -v",
     "pretest": "test -d ./test || (echo run tests from: $npm_package_repository_url && false)",
-    "test": "NODE_ENV=test istanbul cover _mocha -- -u bdd --recursive --bail --reporter list test/spec"
+    "test": "NODE_ENV=test mocha test/spec",
+    "cover": "npm run pretest && NODE_ENV=test istanbul cover _mocha -- test/spec"
   },
   "mdp": {
     "title": "Store",

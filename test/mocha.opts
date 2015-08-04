@@ -1,0 +1,7 @@
+-u bdd
+--recursive
+--bail
+--check-leaks
+--reporter list 
+--globals CONFIG_STORAGE
+-A
